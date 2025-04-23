@@ -98,7 +98,7 @@ class App extends React.Component<{}, State> {
               id="infinite"
               type="checkbox"
               checked={this.state.infinite}
-              onChange={e => this.setState({ infinite: !!e.target.value })}
+              onChange={e => this.setState({ infinite: !!e.target.checked })}
             />
           </div>
         </div>
