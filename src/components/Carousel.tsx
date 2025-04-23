@@ -24,7 +24,7 @@ const Carousel: React.FC<Props> = ({
   const totalImages = images.length;
   const maxPosition = totalImages - frameSize;
   const canHandlePrev = position !== 0;
-  const canHandleNext = position !== maxPosition || infinite;
+  const canHandleNext = infinite || position !== maxPosition;
 
   const handlePrev = () => {
     if (canHandlePrev) {
@@ -46,15 +46,16 @@ const Carousel: React.FC<Props> = ({
 
   return (
     <div className="Carousel" style={{ width: `${itemWidth * frameSize}px` }}>
-      <ul className="Carousel__list">
+      <ul
+        className="Carousel__list"
+        style={{
+          transform: `translateX(${-position * itemWidth}px)`,
+          transition: `transform ${animationDuration}ms`,
+          width: `${frameSize * itemWidth}px`,
+        }}
+      >
         {images.map(image => (
-          <li
-            key={image}
-            style={{
-              transform: `translateX(${-position * itemWidth}px)`,
-              transition: `transform ${animationDuration}ms`,
-            }}
-          >
+          <li key={image} style={{ flex: `0 0 ${itemWidth}px` }}>
             <img src={image} alt={image} width={itemWidth} />
           </li>
         ))}
